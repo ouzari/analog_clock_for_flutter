@@ -23,9 +23,9 @@ class MyApp extends StatelessWidget {
           body: Center(
               child: SizedBox(
                   child: FlutterAnalogClock(
-            width: 400,
-            height: 400,
-          )))),
+                           width: 400,
+                           height: 400,
+                  )))),
     );
   }
 }
