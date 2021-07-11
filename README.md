@@ -3,14 +3,14 @@
 Beautiful flutter analog clock
 
 ## Screenshots
-(clock01.png)
+<img src='clock01.png'>
 
 ## Usage
 To use plugin, just import package `import 'package:analog_clock_for_flutter/analog_clock.dart';`
 
 ## Example
 You can check example directory to know how to use it.
-'''dart
+```dart
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-'''
+```
 ## Getting Started
 
 This project is a starting point for a Dart
