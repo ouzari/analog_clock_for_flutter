@@ -3,7 +3,7 @@
 Beautiful flutter analog clock
 
 ## Screenshots
-<img src='clock01.png'>
+<img src='clocks.gif'>
 
 ## Usage
 To use plugin, just import package `import 'package:analog_clock_for_flutter/analog_clock.dart';`
