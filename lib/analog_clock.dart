@@ -17,16 +17,15 @@ class Clock {
 class FlutterAnalogClock extends StatefulWidget {
   final DateTime dateTime;
   final double borderWidth;
-  final double width;
-  final double height;
+
+  final double radius;
   final BoxDecoration decoration;
   final Widget child;
 
   const FlutterAnalogClock(
       {this.dateTime,
       this.borderWidth = 0,
-      this.width = 300,
-      this.height = 300,
+      this.radius = 350,
       this.decoration = const BoxDecoration(),
       this.child,
       Key key})
@@ -56,6 +55,7 @@ class _FlutterAnalogClockState extends State<FlutterAnalogClock> {
   ui.Image watchBackground;
   List<Clock> clocks = [];
   int clockIndex = 0;
+  bool showLoader = false;
   @override
   void initState() {
     super.initState();
@@ -66,30 +66,34 @@ class _FlutterAnalogClockState extends State<FlutterAnalogClock> {
         setState(() {});
       }
     });
-    getClocks().then((value) => getImage());
+    showLoader = true;
+    getClocks().then((value) {
+      showLoader = false;
+      getImage();
+    });
   }
 
   Future<void> getClocks() async {
     clocks = [
       Clock(
           await getUiImage("assets/watches/clockBackground01.png",
-              widget.height.toInt(), widget.width.toInt()),
+              widget.radius.toInt(), widget.radius.toInt()),
           Colors.black),
       Clock(
           await getUiImage("assets/watches/clockBackground02.png",
-              widget.height.toInt(), widget.width.toInt()),
+              widget.radius.toInt(), widget.radius.toInt()),
           Colors.brown),
       Clock(
           await getUiImage("assets/watches/clockBackground03.png",
-              widget.height.toInt(), widget.width.toInt()),
+              widget.radius.toInt(), widget.radius.toInt()),
           Colors.blue),
       Clock(
           await getUiImage("assets/watches/clockBackground04.png",
-              widget.height.toInt(), widget.width.toInt()),
+              widget.radius.toInt(), widget.radius.toInt()),
           Colors.amberAccent),
       Clock(
           await getUiImage("assets/watches/clockBackground05.png",
-              widget.height.toInt(), widget.width.toInt()),
+              widget.radius.toInt(), widget.radius.toInt()),
           Colors.black)
     ];
   }
@@ -119,27 +123,28 @@ class _FlutterAnalogClockState extends State<FlutterAnalogClock> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: widget.width,
-      height: widget.height,
+      width: widget.radius,
+      height: widget.radius,
       decoration: widget.decoration,
-      child: SwipeGestureRecognizer(
-        onSwipeLeft: () {
-          swipeClock(true);
-        },
-        onSwipeRight: () {
-          swipeClock(false);
-        },
-        child: clocks.length > 0
-            ? CustomPaint(
+      child: !showLoader
+          ? SwipeGestureRecognizer(
+              onSwipeLeft: () {
+                swipeClock(true);
+              },
+              onSwipeRight: () {
+                swipeClock(false);
+              },
+              child: CustomPaint(
                 child: widget.child,
                 painter: FlutterAnalogClockPainter(_dateTime ?? DateTime.now(),
                     borderWidth: widget.borderWidth,
                     watchBackground: watchBackground,
                     watchIndex: clockIndex,
-                    handsColor: clocks[clockIndex].handsColor),
-              )
-            : Container(),
-      ),
+                    handsColor: clocks[clockIndex].handsColor,
+                    watchRadius: widget.radius),
+              ),
+            )
+          : SizedBox(height: 10, width: 10, child: CircularProgressIndicator()),
     );
   }
 
@@ -156,11 +161,13 @@ class FlutterAnalogClockPainter extends CustomPainter {
   final ui.Image watchBackground;
   int watchIndex;
   Color handsColor;
+  double watchRadius;
   FlutterAnalogClockPainter(this._datetime,
       {double borderWidth,
       this.watchBackground,
       this.watchIndex,
-      this.handsColor})
+      this.handsColor,
+      this.watchRadius})
       : _borderWidth = borderWidth;
 
   @override
@@ -186,8 +193,8 @@ class FlutterAnalogClockPainter extends CustomPainter {
         ..isAntiAlias = true;
       canvas.drawCircle(Offset(0, 0), radius - borderWidth / 2, borderPaint);
     }
-    double L = 150;
-    double S = 6;
+    double L = watchRadius * (150 / 350);
+    double S = watchRadius * (6 / 350);
     _paintHourHand(canvas, L / 2.0, S);
     _paintMinuteHand(canvas, L / 1.4, S / 1.4);
     _paintSecondHand(canvas, L / 1.2, S / 3);

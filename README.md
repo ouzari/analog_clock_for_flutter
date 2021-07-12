@@ -20,12 +20,8 @@ class MyApp extends StatelessWidget {
           appBar: AppBar(
             title: Text('Clock demo'),
           ),
-          body: Center(
-              child: SizedBox(
-                  child: FlutterAnalogClock(
-                           width: 400,
-                           height: 400,
-                  )))),
+          body:
+              Center(child: SizedBox(child: FlutterAnalogClock(radius: 400)))),
     );
   }
 }
