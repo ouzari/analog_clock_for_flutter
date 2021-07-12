@@ -1,10 +1,9 @@
 # analog_clock_for_flutter
 
-Beautiful flutter analog clock
+Beautiful flutter analog clocks
 
 ## Screenshots
-<img src='clocks.gif'>
-
+![clocks.gif](clocks.gif)
 ## Usage
 To use plugin, just import package `import 'package:analog_clock_for_flutter/analog_clock.dart';`
 

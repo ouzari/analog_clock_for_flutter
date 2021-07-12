@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:image/image.dart' as image;
 import 'package:swipe_gesture_recognizer/swipe_gesture_recognizer.dart';
 
+///The clock model
 class Clock {
   //String image;
   ui.Image image;
