@@ -1,7 +1,6 @@
 name: analog_clock_for_flutter
 description: Beautiful flutter analog clocks
-version: 0.0.2
-author: Ouzani Abd Raouf <ouzarinacime@gmail.com>
+version: 0.0.22+1
 homepage: https://github.com/ouzari/analog_clock_for_flutter
 
 environment:

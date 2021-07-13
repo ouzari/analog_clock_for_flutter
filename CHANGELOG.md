@@ -1,3 +1,7 @@
+## [0.0.21] - 12/07/2021.
+
+* Enhancing readme.md file.
+
 ## [0.0.2] - 12/07/2021.
 
 * Fixing a bug.
